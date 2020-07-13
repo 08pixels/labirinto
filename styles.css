@@ -1,0 +1,18 @@
+table {
+  border-collapse: collapse;
+}
+
+td {
+  text-align: center;
+  height: 24px;
+  width: 24px;
+  border: solid 1px #000;
+}
+
+.player {
+  background-color: #FF5555;
+}
+
+.obstable {
+  background-color:#555555;
+}
