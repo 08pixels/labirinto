@@ -64,7 +64,7 @@ class Scene {
         return false
       if ( y < 0 || y >= this.structure.width )
         return false
-      if ( getElement ( x, y ).className != "empty" )
+      if ( getElement( x, y ).className != "empty" )
         return false
 
       return true
@@ -74,47 +74,25 @@ class Scene {
     const x = this.player.position.x
     const y = this.player.position.y
 
+    const moviment = {
+      "left" : { x: 0, y:-1 },
+      "right": { x: 0, y: 1 },
+      "up"   : { x:-1, y: 0 },
+      "down" : { x: 1, y: 0 }
+    }
+
     let playerElement = document.querySelector ( ".player" )
+    const displace = moviment[direction]
 
-    switch ( direction ) {
-      case  "left":
-        if ( isValid ( x, y - 1 ) ) {
-          emptyClassName ( playerElement )
-          addClassName ( getElement ( x, y - 1 ) )
+    if ( isValid ( x + displace.x, y + displace.y ) ) {
+      emptyClassName ( playerElement )
+      addClassName ( getElement ( x + displace.x, y + displace.y ) )
 
-          --this.player.position.y
-        }
-        break
-
-      case "right":
-        if ( isValid ( x, y + 1 ) ) {
-          emptyClassName ( playerElement )
-          addClassName ( getElement ( x, y + 1 ) )
-
-          ++this.player.position.y
-        }
-
-        break
-
-      case    "up":
-        if ( isValid ( x - 1, y ) ) {
-          emptyClassName ( playerElement )
-          addClassName ( getElement ( x - 1, y ) )
-
-          --this.player.position.x
-        }
-        break
-
-      case  "down":
-        if ( isValid ( x + 1, y ) ) {
-          emptyClassName ( playerElement )
-          addClassName ( getElement ( x + 1, y) )
-          
-          ++this.player.position.x
-        }
-        break
+      this.player.position.x = x + displace.x
+      this.player.position.y = y + displace.y
     }
   }
+
 }
 
 const handleCell = ( cell ) => {
